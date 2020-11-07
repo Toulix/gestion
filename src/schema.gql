@@ -89,12 +89,12 @@ type Promotion {
 type Query {
   anneeUniversitaire(id: String!): Promotion!
   inscriptions: [Inscription!]!
-  me: User!
-  users: [User!]!
+  me: Utilisateur!
+  users: [Utilisateur!]!
 }
 
-type User {
-  _id: ID!
+type Utilisateur {
+  id: ID!
   password: String
   roles: String!
   username: String!

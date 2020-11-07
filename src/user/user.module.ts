@@ -12,7 +12,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthModule } from 'src/auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 
@@ -21,7 +20,7 @@ import { PassportModule } from '@nestjs/passport';
   imports: [
   MongooseModule.forFeature([{ name:'User', schema: UserSchema}])],
   controllers: [UserController],
-  providers: [UserService, UserResolver, GqlAuthGuard],
+  providers: [UserService, UserResolver],
   exports: [UserService]
 })
 export class UserModule {}
