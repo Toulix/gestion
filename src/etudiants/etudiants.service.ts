@@ -15,4 +15,8 @@ export class EtudiantsService {
         // console.log(result);
         return await newStudent.save();
     }
+
+    async findById(idEtudiant) {
+        return await this.studentModel.findById(idEtudiant);
+    }
 }

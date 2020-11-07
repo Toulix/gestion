@@ -8,7 +8,7 @@ import { Injectable } from '@nestjs/common';
 export class AnneeUniversitaireService {
     constructor(@InjectModel('Promotion') private readonly promotionModel: Model<Promotion>) {}
       
-    async findById(id: String): Promise<Promotion> {
+    async findById(id): Promise<Promotion> {
             return await this.promotionModel.findById(id).exec();
          }  
 

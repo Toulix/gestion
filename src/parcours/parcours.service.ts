@@ -8,7 +8,7 @@ import { Model } from 'mongoose';
 export class ParcoursService {
     constructor(@InjectModel('Parcour') private readonly parcoursModel: Model<Parcours>){}
     
-    async findById(idParcours: string) {
+    async findById(idParcours) {
         return await this.parcoursModel.findById(idParcours).exec();
     }
 

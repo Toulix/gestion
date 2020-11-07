@@ -8,8 +8,8 @@ import { Niveau } from '../interface/niveau.interface';
 export class NiveauService {
     constructor(@InjectModel('Niveau') private readonly niveauModel: Model<Niveau> ) {}
 
-    async getById(id: String) {
-            return await this.niveauModel.findById(id);
+    async getById(idNiveau) {
+            return await this.niveauModel.findById(idNiveau);
         }
     async create(niveau) {
         const newNiveau = new this.niveauModel(niveau);

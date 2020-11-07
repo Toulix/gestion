@@ -1,16 +1,16 @@
-import { UserModule } from './../user/user.module';
 import { jwtConstants } from './../../constant';
+import { UserSchema } from './../Model/user';
+import { GqlAuthGuard } from './jwt-auth.guard';
 import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { JwtModule } from '@nestjs/jwt';
+
 
 @Module({
-  imports : [
-    UserModule,
-    JwtModule.register({
-    secret: jwtConstants.secret,
-    signOptions: { expiresIn : '1h'}
-  })],
-  providers: [AuthService]
+  imports: [
+    MongooseModule.forFeature([{ name:'User', schema: UserSchema}])],
+  providers: [AuthService, GqlAuthGuard],
+  exports: [AuthService]
 })
 export class AuthModule {}

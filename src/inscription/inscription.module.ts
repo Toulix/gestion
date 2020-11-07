@@ -1,3 +1,4 @@
+import { InscriptionResolver } from './inscription.resolver';
 import { InscriptionSchema } from './../Model/inscription';
 import { ParcoursSchema } from './../Model/parcours';
 import { NiveauSchema } from './../Model/niveau';
@@ -33,7 +34,9 @@ const schemas = [
     BordereauxsService,
     AnneeUniversitaireService,
     NiveauService,
-    ParcoursService
+    ParcoursService,
+    //don't forget to add the The GraphQL resolver into the providers array
+    InscriptionResolver
   ]
 })
 export class InscriptionModule { }

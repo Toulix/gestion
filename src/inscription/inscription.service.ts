@@ -24,4 +24,23 @@ export class InscriptionService {
                                             });
         return await newInscription.save();
     }
+
+    async findAll() {
+      return await this.inscriptionModel.find();
+    }
+
+    async update(idInscription, etatInscription) {
+      return await this.inscriptionModel.findOneAndUpdate(
+      {
+        _id: idInscription
+      }, 
+      {
+        $set: {
+            etat: etatInscription
+          }
+      },
+      {
+        new: true
+      });
+    }
 }

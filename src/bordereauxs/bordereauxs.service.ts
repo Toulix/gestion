@@ -14,4 +14,8 @@ export class BordereauxsService {
         // console.log(result);
         return await newBordereau.save();
     }
+
+    async findById(idBordereau) {
+        return await this.bordereauModel.findById(idBordereau);
+    }
 }

@@ -13,10 +13,20 @@ import { BordereauxsModule } from './bordereauxs/bordereauxs.module';
 import { NiveauModule } from './niveau/niveau.module';
 import { ParcoursModule } from './parcours/parcours.module';
 import { AnneeUniversitaireModule } from './annee-universitaire/annee-universitaire.module';
-
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 @Module({
   imports: [
+    GraphQLModule.forRoot({
+      context: ({req}) => ({headers: req.headers}),
+      playground: true,
+      debug: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
+      include: [InscriptionModule, UserModule, AnneeUniversitaireModule, AuthModule],
+      installSubscriptionHandlers: true,
+    }),
     UserModule,
     AuthModule,
     EtudiantsModule,

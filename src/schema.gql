@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Bordereau {
+  bordereau: String!
+  dateVersement: DateTime!
+  id: ID!
+  montant: Float!
+  numBordereau: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Etudiant {
+  adresse: String!
+  adresseParentsTuteurs: String
+  anneeObtention: String!
+  avatar: String!
+  createdAt: DateTime!
+  dateNaissance: DateTime!
+  id: ID!
+  lieuNaissance: String!
+  mail: String!
+  matricule: String
+  mention: String!
+  mere: String
+  nom: String!
+  origine: String!
+  pere: String
+  prenom: String!
+  professionMere: String
+  professionPere: String
+  professionTuteur: String
+  serie: String!
+  sexe: String!
+  situationMatrimoniale: String!
+  statusTuteur: String
+  statutMere: String
+  statutPere: String
+  tel: String!
+  tuteur: String
+  updatedAt: DateTime!
+}
+
+type Inscription {
+  anneeUniversitaire: Promotion!
+  bordereau: Bordereau!
+  createdAt: DateTime!
+  date: DateTime!
+  etat: String
+  etudiant: Etudiant!
+  id: ID!
+  niveau: Niveau!
+  parcours: Parcour!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  singIn(password: String!, username: String!): String!
+  updateInscription(etat: String!, id: String!): Inscription!
+}
+
+type Niveau {
+  description: String!
+  id: ID!
+  libelle: String!
+}
+
+type Parcour {
+  abbreviation: String!
+  description: String!
+  id: ID!
+}
+
+type Promotion {
+  createdAt: DateTime!
+  debut: DateTime!
+  fin: DateTime!
+  id: ID!
+  isActive: Boolean!
+  libelle: String!
+  updatedAt: DateTime!
+}
+
+type Query {
+  anneeUniversitaire(id: String!): Promotion!
+  inscriptions: [Inscription!]!
+  me: User!
+  users: [User!]!
+}
+
+type User {
+  _id: ID!
+  password: String
+  roles: String!
+  username: String!
+}
