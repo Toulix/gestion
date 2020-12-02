@@ -14,9 +14,4 @@ export class UserController {
     async createUser(@Body() userDTO: UserDTO) {
         return await this.userService.create(userDTO);
     }
-
-    @Get() 
-    async getUsernameAndPassword() {
-        
-    }
 }

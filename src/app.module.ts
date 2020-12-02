@@ -1,7 +1,7 @@
+
 import { jwtConstants } from './../constant';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { EtudiantSchema } from './Model/etudiant';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,6 +16,13 @@ import { ParcoursModule } from './parcours/parcours.module';
 import { AnneeUniversitaireModule } from './annee-universitaire/annee-universitaire.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { EnseignantModule } from './enseignant/enseignant.module';
+import { ScolariteModule } from './scolarite/scolarite.module';
+import { AdminModule } from './admin/admin.module';
+import { ReclamationModule } from './reclamation/reclamation.module';
+import { NotesModule } from './notes/notes.module';
+import { MatiereModule } from './matiere/matiere.module';
+import { EnseignementModule } from './enseignement/enseignement.module';
 import * as jwt from 'jsonwebtoken'
 
 const getUser = token => {
@@ -46,8 +53,20 @@ const getUser = token => {
       playground: true,
       debug: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
-      include: [InscriptionModule, UserModule, AnneeUniversitaireModule, AuthModule],
+      sortSchema: false,
+      include: [
+        AdminModule,
+        InscriptionModule,
+        UserModule,
+        AnneeUniversitaireModule,
+        AuthModule,
+        EtudiantsModule,    
+        ScolariteModule,
+        EnseignantModule,
+        EnseignementModule,
+        MatiereModule,
+        NotesModule,
+        ReclamationModule],
       installSubscriptionHandlers: true,
     }),
     UserModule,
@@ -59,6 +78,13 @@ const getUser = token => {
     ParcoursModule,
     AnneeUniversitaireModule,
     MongooseModule.forRoot('mongodb://localhost:27017/gestion'),
+    EnseignantModule,
+    ScolariteModule,
+    AdminModule,
+    ReclamationModule,
+    NotesModule,
+    MatiereModule,
+    EnseignementModule,
     ],
   controllers: [AppController, ImagesController, BordereauxsController],
   providers: [AppService],

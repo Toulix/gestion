@@ -1,5 +1,5 @@
-import { Controller, Post, UseInterceptors, UploadedFiles, Get, Param, Res, Req } from '@nestjs/common';
-import { FileFieldsInterceptor } from "@nestjs/platform-express";
+import { Controller, Post, UseInterceptors, UploadedFiles, Get, Param, Res, Req, UploadedFile } from '@nestjs/common';
+import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express";
 import { Response, Request} from 'express';
 import { join } from 'path';
 import { diskStorage } from 'multer';
@@ -34,6 +34,31 @@ export class ImagesController {
         };
     }
 //file nam => get /images/:imagename
+    @Post('/enseignants')
+    @UseInterceptors(
+        FileInterceptor('enseignantImage', storage)
+    )
+    uploadEnseignantFile(@UploadedFile() file) {        
+        return { realAvatar: file.originalname}
+    }
+    
+    @Post('/scolarites')
+    @UseInterceptors(
+        FileInterceptor('scolariteImage', storage)
+    )
+    uploadScolariteFile(@UploadedFile() file) {        
+        return { realScolariteAvatar: file.originalname}
+    }
+
+    @Post('/admin')
+    @UseInterceptors(
+        FileInterceptor('adminImage', storage)
+    )
+    uploadAdminFile(@UploadedFile() file) {        
+        return { realAdminAvatar: file.originalname}
+    }
+
+
     @Get(':imagename')
     seeUploadedFile(@Param('imagename') image, @Res() res: Response): Observable<any> {
         return of(res.sendFile(join(process.cwd(), 'uploads/' + image)));

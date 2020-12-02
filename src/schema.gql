@@ -2,12 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Bordereau {
-  bordereau: String!
-  dateVersement: DateTime!
+type Enseignant {
   id: ID!
-  montant: Float!
-  numBordereau: String!
+  nom: String
+  prenom: String
+  titre: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
@@ -15,87 +20,259 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Etudiant {
-  adresse: String!
-  adresseParentsTuteurs: String
-  anneeObtention: String!
-  avatar: String!
-  createdAt: DateTime!
-  dateNaissance: DateTime!
+type Utilisateur {
   id: ID!
-  lieuNaissance: String!
-  mail: String!
+  username: String!
+  password: String!
+  roles: String!
+  profile: ID
+}
+
+type Scolarite {
+  id: ID!
+  nom: String
+  prenom: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
+  fonction: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Parcour {
+  id: ID!
+  abbreviation: String!
+  description: String!
+}
+
+type Niveau {
+  id: ID!
+  libelle: String!
+  description: String!
+}
+
+type Promotion {
+  id: ID!
+  isActive: Boolean!
+  libelle: String!
+  debut: DateTime!
+  fin: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Bordereau {
+  id: ID!
+  bordereau: String!
+  numBordereau: String!
+  dateVersement: DateTime!
+  montant: Float!
+}
+
+type Etudiant {
+  id: ID!
   matricule: String
-  mention: String!
-  mere: String
+  avatar: String!
   nom: String!
-  origine: String!
-  pere: String
+  cin: String!
   prenom: String!
-  professionMere: String
-  professionPere: String
-  professionTuteur: String
-  serie: String!
-  sexe: String!
-  situationMatrimoniale: String!
-  statusTuteur: String
-  statutMere: String
-  statutPere: String
   tel: String!
+  mail: String!
+  adresse: String!
+  sexe: String!
+  dateNaissance: DateTime!
+  lieuNaissance: String!
+  situationMatrimoniale: String!
+  pere: String
+  statutPere: String
+  professionPere: String
+  mere: String
+  statutMere: String
+  professionMere: String
   tuteur: String
+  statusTuteur: String
+  professionTuteur: String
+  adresseParentsTuteurs: String
+  serie: String!
+  mention: String!
+  anneeObtention: String!
+  origine: String!
+  createdAt: DateTime!
   updatedAt: DateTime!
 }
 
 type Inscription {
-  anneeUniversitaire: Promotion!
-  bordereau: Bordereau!
-  createdAt: DateTime!
-  date: DateTime!
+  id: ID!
   etat: String
   etudiant: Etudiant!
-  id: ID!
+  bordereau: Bordereau!
+  anneeUniversitaire: Promotion!
   niveau: Niveau!
   parcours: Parcour!
+  date: DateTime!
+  createdAt: DateTime!
   updatedAt: DateTime!
 }
 
-type Mutation {
-  singIn(password: String!, username: String!): String!
-  updateInscription(etat: String!, id: String!): Inscription!
-}
-
-type Niveau {
-  description: String!
+type Admin {
   id: ID!
-  libelle: String!
-}
-
-type Parcour {
-  abbreviation: String!
-  description: String!
-  id: ID!
-}
-
-type Promotion {
+  nom: String
+  prenom: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
   createdAt: DateTime!
-  debut: DateTime!
-  fin: DateTime!
+  updatedAt: DateTime!
+}
+
+type Matiere {
   id: ID!
-  isActive: Boolean!
-  libelle: String!
+  libelle: String
+  abbreviation: String
+}
+
+type Reclamation {
+  id: ID!
+  etudiant: Etudiant!
+  niveau: Niveau!
+  parcours: Parcour!
+  anneeUniversitaire: Promotion!
+  enseignant: Enseignant!
+  matiere: Matiere!
+  motif: String
+  date: DateTime!
+  etat: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Note {
+  id: ID!
+  etudiant: Etudiant!
+  valeur: Float!
+  matiere: Matiere!
+  niveau: Niveau!
+  parcours: Parcour!
+  anneeUniversitaire: Promotion!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Enseignement {
+  id: ID!
+  matiere: Matiere!
+  enseignant: Enseignant!
+  niveau: Niveau!
+  parcours: Parcour!
+  anneeUniversitaire: Promotion!
+  enseignementTheorique: Int
+  enseignementDirige: Int
+  enseignementPratique: Int
+  credit: Float
+  poids: Float
+  createdAt: DateTime!
   updatedAt: DateTime!
 }
 
 type Query {
-  anneeUniversitaire(id: String!): Promotion!
-  inscriptions: [Inscription!]!
-  me: Utilisateur!
   users: [Utilisateur!]!
+  me: Utilisateur!
+  inscriptions: [Inscription!]!
+  inscription(id: String!): Inscription!
+  anneeUniversitaire(id: String!): Promotion!
+  enseignants: [Enseignant!]!
+  enseignant(enseignantId: String!): Enseignant!
+  scolarites: [Scolarite!]!
+  scolarite(scolariteId: String!): Scolarite!
+  admins: [Admin!]!
+  admin(adminId: String!): Admin!
+  reclamations: [Reclamation!]!
+  reclamationPerEnseignant: [Reclamation!]!
+  notes: [Note!]!
+  matieres: [Matiere!]!
+  enseignements: [Enseignement!]!
+  matieresParEnseignant(idEnseignant: String!): Enseignement!
+  matieresOfCurrentEnseignant: Enseignement!
 }
 
-type Utilisateur {
-  id: ID!
-  password: String
-  roles: String!
+type Mutation {
+  singIn(password: String!, username: String!): String!
+  createUser(createUserInput: CreateUserInput!): Utilisateur!
+  addEnseignantProfileToUser(idProfile: String!, userId: String!): Utilisateur!
+  addScolariteProfileToUser(idProfile: String!, userId: String!): Utilisateur!
+  addAdminProfileToUser(idProfile: String!, userId: String!): Utilisateur!
+  addEtudiantProfileToUser(idProfile: String!, userId: String!): Utilisateur!
+  updateInscription(etat: String!, id: String!): Inscription!
+  createDefaultEnseignantProfile: Enseignant!
+  editEnseignantProfile(updateEnseignantInput: UpdateEnseignantInput!, enseignantId: String!): Enseignant!
+  createDefaultScolariteProfile: Scolarite!
+  editScolariteProfile(updateScolariteInput: UpdateScolariteInput!, scolariteId: String!): Scolarite!
+  createDefaultAdminProfile: Admin!
+  editAdminProfile(updateAdminInput: UpdateAdminInput!, adminId: String!): Admin!
+  updateReclamation(reclamationId: ID!, etat: String, note: Float): Reclamation!
+  createReclamation(createReclamationData: CreateReclamationInput!): Reclamation!
+  createNote(CreateNoteInput: CreateNoteInput!): Note!
+  updateNote(valeur: Float!, idNote: String!): Note!
+  createMatiere(abbreviation: String!, libelle: String!): Matiere!
+  deleteMatiere(idMatiere: String!): Boolean!
+}
+
+input CreateUserInput {
   username: String!
+  password: String!
+  roles: String!
+  profile: ID
+}
+
+input UpdateEnseignantInput {
+  nom: String
+  prenom: String
+  titre: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
+}
+
+input UpdateScolariteInput {
+  nom: String
+  prenom: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
+  fonction: String
+}
+
+input UpdateAdminInput {
+  nom: String
+  prenom: String
+  tel: String
+  email: String
+  image: String
+  sexe: String
+}
+
+input CreateReclamationInput {
+  etudiant: ID!
+  niveau: ID!
+  parcours: ID!
+  anneeUniversitaire: ID!
+  enseignant: ID!
+  matiere: ID!
+  motif: ID
+  note: Float
+  etat: Float
+}
+
+input CreateNoteInput {
+  etudiant: ID!
+  valeur: Float!
+  matiere: ID!
+  niveau: ID!
+  parcours: ID!
+  anneeUniversitaire: ID!
 }

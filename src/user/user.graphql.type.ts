@@ -1,6 +1,4 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-
-
 @ObjectType()
 export class Utilisateur {
     @Field(type => ID)
@@ -9,11 +7,16 @@ export class Utilisateur {
     @Field()
     username: string;
 
-    @Field({nullable : true})
+    @Field()
     password: string;
 
     @Field()
     roles: string;
+
+    @Field(type => ID, {nullable: true})
+    profile: string;
 }
+
+
 
 //https://hasura.io/learn/graphql/angular-apollo/subscriptions/3-create-subscription/

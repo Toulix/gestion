@@ -26,17 +26,20 @@ export class InscriptionResolver {
     async getAllInscription() {
         return await this.inscriptionService.findAll();
     }
+    
+    @Query(returns => Inscription, { name: 'inscription'})
+    async getSingleInscription(@Args('id') idInscription: string) {
+        return await this.inscriptionService.findOne(idInscription);
+    }
 
     @ResolveField('anneeUniversitaire', returns => Promotion)
     async getAnneeUniversitaire(@Parent() inscription: Inscription) {
-    //    const id = (inscription.anneeUniversitaire).toString();
-    //    console.log(id);
-     return await this.anneeUniversitaireService.findById(inscription.anneeUniversitaire);
+        return await this.anneeUniversitaireService.findById(inscription.anneeUniversitaire);
     }
 
     @ResolveField('etudiant', returns => Etudiant)
     async getEtudiant(@Parent() inscription: Inscription) {
-     return await this.etudiantsService.findById(inscription.etudiant);
+        return await this.etudiantsService.findById(inscription.etudiant);
     }
 
     @ResolveField('bordereau', returns => Bordereau)
@@ -60,18 +63,3 @@ export class InscriptionResolver {
         return this.inscriptionService.update(idInscription, etatInscription)
     }
 }
-
-// @Field(type => Etudiant)
-// etudiant: Etudiant;
-
-// @Field(type => Bordereau)
-// bordereau: Bordereau;
-
-// @Field(type => Promotion)
-// anneeUniversitaire: Promotion;
-
-// @Field(type => Niveau)
-// niveau: Niveau;
-
-// @Field(type => Parcour)
-// parcours: Parcour;

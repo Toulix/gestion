@@ -1,15 +1,14 @@
-import { jwtConstants } from './../../constant';
+import { RolesGuard } from './roles.guard';
 import { UserSchema } from './../Model/user';
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtModule } from '@nestjs/jwt';
 
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name:'User', schema: UserSchema}])],
-  providers: [AuthService],
+  providers: [AuthService, RolesGuard],
   exports: [AuthService]
 })
 export class AuthModule {}

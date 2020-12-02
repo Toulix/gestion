@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 
 export const EtudiantSchema = new mongoose.Schema(
   {
-    matricule: { type: String, unique: true, default:"Non Assigné" },
+    matricule: { type: String, unique: true },
     avatar :  { type: String, unique: true },
     nom: { type: String, required: true },
     prenom: { type: String, required: true },

@@ -35,7 +35,7 @@ export class UserService {
    }
 
    async generateJWT(user) {
-        return  await jwt.sign({ id: user.id, username: user.username, roles: user.roles },
+        return  await jwt.sign({ id: user.id, username: user.username, roles: user.roles, profile: user.profile },
              jwtConstants.secret)
     }
    

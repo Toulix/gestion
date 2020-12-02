@@ -1,4 +1,4 @@
-  
+
 import { Field, ID, ObjectType, GraphQLISODateTime } from '@nestjs/graphql';
 
 
@@ -17,25 +17,28 @@ export class Etudiant {
   nom: string;
 
   @Field()
+  cin: string;
+
+  @Field()
   prenom: string;
-  
+
   @Field()
   tel: string;
 
   @Field()
   mail: string;
 
-//   @Field(type => [String])
-//   etat: string[];
+  //   @Field(type => [String])
+  //   etat: string[];
   @Field()
   adresse: string;
 
   @Field()
   sexe: string;
-  
-  @Field(type => GraphQLISODateTime )
+
+  @Field(type => GraphQLISODateTime)
   dateNaissance: Date;
-  
+
   @Field()
   lieuNaissance: string;
 
@@ -59,37 +62,37 @@ export class Etudiant {
 
   @Field({ nullable: true })
   professionMere?: string;
-  
+
   @Field({ nullable: true })
   tuteur?: string;
-  
+
   @Field({ nullable: true })
   statusTuteur?: string;
-  
+
   @Field({ nullable: true })
   professionTuteur?: string;
-  
+
   @Field({ nullable: true })
   adresseParentsTuteurs?: string;
-  
+
   @Field()
   serie: string;
-  
+
   @Field()
   mention: string;
-  
+
   @Field()
   anneeObtention: string;
-  
+
   @Field()
   origine: string;
 
   @Field(type => GraphQLISODateTime)
   createdAt: Date;
-  
+
   @Field(type => GraphQLISODateTime)
   updatedAt: Date;
-  
+
 }
 
 

@@ -28,6 +28,9 @@ export class InscriptionService {
     async findAll() {
       return await this.inscriptionModel.find();
     }
+    async findOne(idInscription) {
+      return await this.inscriptionModel.findById(idInscription).exec();
+    }
 
     async update(idInscription, etatInscription) {
       return await this.inscriptionModel.findOneAndUpdate(
