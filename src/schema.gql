@@ -163,11 +163,14 @@ type Note {
 
 type Enseignement {
   id: ID!
-  matiere: Matiere!
-  enseignant: Enseignant!
-  niveau: Niveau!
-  parcours: Parcour!
-  anneeUniversitaire: Promotion!
+  libelle: String
+  abbreviation: String
+  enseignant: String
+  semestre: String
+  ue: String
+  niveau: String
+  parcours: String
+  anneeUniversitaire: String
   enseignementTheorique: Int
   enseignementDirige: Int
   enseignementPratique: Int
@@ -194,7 +197,7 @@ type Query {
   notes: [Note!]!
   matieres: [Matiere!]!
   enseignements: [Enseignement!]!
-  matieresParEnseignant(idEnseignant: String!): Enseignement!
+  matieresParEnseignant(enseignantName: String!): Enseignement!
   matieresOfCurrentEnseignant: Enseignement!
 }
 
@@ -218,6 +221,9 @@ type Mutation {
   updateNote(valeur: Float!, idNote: String!): Note!
   createMatiere(abbreviation: String!, libelle: String!): Matiere!
   deleteMatiere(idMatiere: String!): Boolean!
+  createEnseignement(createEnseignementInput: CreateEnseignementInput!): Enseignement!
+  updateEnseignement(updateEnseignementInput: UpdateEnseignementInput!, enseignementId: String!): Enseignement!
+  deleteEnseignement(idMatiere: String!): Boolean!
 }
 
 input CreateUserInput {
@@ -275,4 +281,36 @@ input CreateNoteInput {
   niveau: ID!
   parcours: ID!
   anneeUniversitaire: ID!
+}
+
+input CreateEnseignementInput {
+  libelle: String
+  abbreviation: String
+  enseignant: String
+  semestre: String
+  ue: String
+  niveau: String
+  parcours: String
+  anneeUniversitaire: String
+  enseignementTheorique: Int
+  enseignementDirige: Int
+  enseignementPratique: Int
+  credit: Float
+  poids: Float
+}
+
+input UpdateEnseignementInput {
+  libelle: String
+  abbreviation: String
+  enseignant: String
+  semestre: String
+  ue: String
+  niveau: String
+  parcours: String
+  anneeUniversitaire: String
+  enseignementTheorique: Int
+  enseignementDirige: Int
+  enseignementPratique: Int
+  credit: Float
+  poids: Float
 }

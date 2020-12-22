@@ -23,6 +23,7 @@ import { ReclamationModule } from './reclamation/reclamation.module';
 import { NotesModule } from './notes/notes.module';
 import { MatiereModule } from './matiere/matiere.module';
 import { EnseignementModule } from './enseignement/enseignement.module';
+import { UeModule } from './ue/ue.module';
 import * as jwt from 'jsonwebtoken'
 
 const getUser = token => {
@@ -65,6 +66,7 @@ const getUser = token => {
         EnseignantModule,
         EnseignementModule,
         MatiereModule,
+        UeModule,
         NotesModule,
         ReclamationModule],
       installSubscriptionHandlers: true,
@@ -85,6 +87,7 @@ const getUser = token => {
     NotesModule,
     MatiereModule,
     EnseignementModule,
+    UeModule,
     ],
   controllers: [AppController, ImagesController, BordereauxsController],
   providers: [AppService],

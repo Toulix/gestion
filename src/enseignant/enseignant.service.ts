@@ -25,6 +25,8 @@ export class EnseignantService {
         return await newDefaultEnseignantProfile.save();
     }
 
+
+
     async findById(idEnseignant) {
         return this.enseignantModel.findById(idEnseignant).exec();
     }
